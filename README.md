@@ -1,6 +1,6 @@
 --Universal ESP Script 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Universal ESP", HidePremium = true, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Window = OrionLib:MakeWindow({Name = "YOU HUB", HidePremium = true, SaveConfig = true, ConfigFolder = "OrionTest"})
 local Tab = Window:MakeTab({
 	Name = "ESP",
 	Icon = "rbxassetid://4483345998",
@@ -71,6 +71,26 @@ Tab:AddToggle({
 		end    
 		end)
 	end    
+})
+getgenv().esp = false
+getgenv().teamcheck = false
+getgenv().Color = Color3.fromRGB(255, 0, 0)
+Tab:AddToggle({
+	Name = "Esp Door",
+	Default = false,
+	Callback = function(Value)
+		getgenv().esp = Value
+		spawn(function()
+		while wait() do
+		    if not getgenv().esp then
+		          for i,v in
+pairs(currentroom.Door.Door:GetChildren()) do
+		              if v.Character and v.Door:FindFirstChild("Highlight") then
+		                  local Highlight = v.Door:FindFirstChild("Highlight")
+		                  Highlight.Enabled = false
+    		      end
+		      end)
+	end
 })
 Tab:AddColorpicker({
 	Name = "Esp Color",
