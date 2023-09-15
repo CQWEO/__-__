@@ -1,6 +1,6 @@
 --Universal ESP Script 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Door Hub", HidePremium = true, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Window = OrionLib:MakeWindow({Name = "Universal ESP", HidePremium = true, SaveConfig = true, ConfigFolder = "OrionTest"})
 local Tab = Window:MakeTab({
 	Name = "ESP",
 	Icon = "rbxassetid://4483345998",
@@ -8,7 +8,7 @@ local Tab = Window:MakeTab({
 })
 OrionLib:MakeNotification({
 	Name = "Info!",
-	Content = "Esp",
+	Content = "Esp"
 	Image = "rbxassetid://4483345998",
 	Time = 5
 })
@@ -16,7 +16,7 @@ getgenv().esp = false
 getgenv().teamcheck = false
 getgenv().Color = Color3.fromRGB(255, 0, 0)
 Tab:AddToggle({
-	Name = "ESP",
+	Name = "Esp Players",
 	Default = false,
 	Callback = function(Value)
 		getgenv().esp = Value
@@ -72,79 +72,12 @@ Tab:AddToggle({
 		end)
 	end    
 })
-getgenv().esp = false
-getgenv().teamcheck = false
-getgenv().Color = Color3.fromRGB(255, 0, 0)
-Tab:AddToggle({
-	Name = "ESP Doors",
-	Default = false,
-	Callback = function(Value)
-		getgenv().esp = Value
-		spawn(function()
-		while wait() do
-		    if not getgenv().esp then
-		          for i,v in pairs(Door:GetChildren()) do
-		              if v.Door and v.Door:FindFirstChild("Highlight") then
-		                  local Highlight = v.Door:FindFirstChild("Highlight")
-		                  Highlight.Enabled = false
-    		      end
-		      end 
-		      else
-		          for i,v in pairs(Door:GetChildren()) do
-		             if getgenv().teamcheck == true then
-		               if v.Character and v ~= CurrentRoom.0.Door.Door.and v.TeamColor ~= CurrentRoom.0.Door.Door.TeamColor then
-    		                 if v.Door:FindFirstChild("Highlight") then
-    		                 local Highlight = v.Door:FindFirstChild("Highlight") 
-    		                 Highlight.Enabled = true
-    		                 Highlight.FillColor = getgenv().Color
-    		                 Highlight.Adornee = v.Door
-    		                 else
-    		                 local Highlight = Instance.new("Highlight",v.Door)
-    		                 Highlight.Enabled = true
-    		                 Highlight.FillColor = getgenv().Color
-    		                 Highlight.Adornee = v.Door
-    		              end       
-    		           end  
-		                if v.TeamColor == CurrentRoom.0.Door.Door.TeamColor then
-    		              if v.Door and v.Door:FindFirstChild("Highlight") then
-    		                  local Highlight = v.Door:FindFirstChild("Highlight")
-        		              Highlight.Enabled = false
-        		          end    
-    		            end 
-    		          else
-    		              if v.Door and v ~= CurrentRoom.0.Door.Door then
-    		                 if v.Door:FindFirstChild("Highlight") then
-    		                 local Highlight = v.Door:FindFirstChild("Highlight") 
-    		                 Highlight.Enabled = true
-    		                 Highlight.FillColor = getgenv().Color
-    		                 Highlight.Adornee = v.Door
-    		                 else
-    		                 local Highlight = Instance.new("Highlight",v.Door)
-    		                 Highlight.Enabled = true
-    		                 Highlight.FillColor = getgenv().Color
-    		                 Highlight.Adornee = v.Door
-    		              end       
-    		           end    
-		            end       
-		      end    
-		    end  
-		end    
-		end)
-	end    
-})
 Tab:AddColorpicker({
 	Name = "Esp Color",
 	Default = Color3.fromRGB(255, 0, 0),
 	Callback = function(Value)
 		getgenv().Color = Value
-	end	  
-})
-Tab:AddToggle({
-	Name = "Teamcheck",
-	Default = false,
-	Callback = function(Value)
-		getgenv().teamcheck = Value
-	end    
+	end
 })
 Tab:AddToggle({
 	Name = "Rainbow ESP",
